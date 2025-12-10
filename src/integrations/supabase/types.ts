@@ -14,7 +14,66 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      doctors: {
+        Row: {
+          address: string
+          clinic_type: string | null
+          created_at: string
+          csv_id: number | null
+          geo_keywords: string | null
+          google_map_link: string | null
+          id: string
+          image_url: string | null
+          name: string
+          phone: string | null
+          position: string | null
+          slug: string | null
+          specialty: string
+          type: string
+          updated_at: string
+          workplace: string
+          zalo_active: boolean | null
+        }
+        Insert: {
+          address: string
+          clinic_type?: string | null
+          created_at?: string
+          csv_id?: number | null
+          geo_keywords?: string | null
+          google_map_link?: string | null
+          id?: string
+          image_url?: string | null
+          name: string
+          phone?: string | null
+          position?: string | null
+          slug?: string | null
+          specialty: string
+          type?: string
+          updated_at?: string
+          workplace: string
+          zalo_active?: boolean | null
+        }
+        Update: {
+          address?: string
+          clinic_type?: string | null
+          created_at?: string
+          csv_id?: number | null
+          geo_keywords?: string | null
+          google_map_link?: string | null
+          id?: string
+          image_url?: string | null
+          name?: string
+          phone?: string | null
+          position?: string | null
+          slug?: string | null
+          specialty?: string
+          type?: string
+          updated_at?: string
+          workplace?: string
+          zalo_active?: boolean | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
