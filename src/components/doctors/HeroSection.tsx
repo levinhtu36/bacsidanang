@@ -9,7 +9,7 @@ const HeroSection = () => {
           </div>
           <h1 className="text-3xl font-extrabold text-foreground leading-tight mb-4 tracking-tight md:text-4xl">
             Tìm bác sĩ phù hợp <br className="hidden md:block" />
-            <span className="text-gradient">
+            <span className="text-gradient bg-primary-foreground text-secondary-foreground">
               Nhanh • Tin cậy • Miễn phí
             </span>
           </h1>
