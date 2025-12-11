@@ -1,14 +1,17 @@
+import { Sparkles } from 'lucide-react';
 const HeroSection = () => {
   return <div className="relative overflow-hidden gradient-hero border-b border-border">
       <div className="max-w-6xl mx-auto px-4 py-8 md:py-12 flex flex-col md:flex-row items-center gap-8 md:gap-12">
         <div className="flex-1 text-center md:text-left z-10">
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-3 tracking-tight text-foreground animate-fade-in">
-            Tìm bác sĩ phù hợp
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4 animate-fade-in">
+            <Sparkles size={14} />
+            <span>Nền tảng Y tế 4.0</span>
+          </div>
+          <h1 className="text-3xl font-extrabold leading-tight mb-4 tracking-tight bg-blue-50 text-ring md:text-5xl">Tìm bác sĩ phù hợp
+Nhanh • Tin cậy • Miễn phí<br className="hidden md:block" />
+            
           </h1>
-          <p className="text-xl md:text-2xl font-bold text-primary mb-4">
-            Nhanh • Tin cậy • Miễn phí
-          </p>
-          <p className="text-muted-foreground text-sm md:text-base mb-6 max-w-md mx-auto md:mx-0 leading-relaxed">
+          <p className="text-muted-foreground text-lg mb-6 max-w-lg mx-auto md:mx-0 leading-relaxed">
             Kết nối với các chuyên gia y tế hàng đầu tại Đà Nẵng. Thông tin minh bạch, cập nhật liên tục để bạn an tâm chăm sóc sức khỏe.
           </p>
         </div>
