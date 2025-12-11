@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Info, Stethoscope, X } from 'lucide-react';
-import { DOCTORS_DB, getSuggestedKeywords, type Doctor } from '@/data/doctors';
+import { useDoctors, getSuggestedKeywords, type Doctor } from '@/hooks/useDoctors';
 import Header from '@/components/doctors/Header';
 import HeroSection from '@/components/doctors/HeroSection';
 import FeaturesSection from '@/components/doctors/FeaturesSection';
@@ -12,17 +12,10 @@ import SkeletonCard from '@/components/doctors/SkeletonCard';
 const Index = () => {
   const [selectedSpecialty, setSelectedSpecialty] = useState("Tất cả");
   const [searchTerm, setSearchTerm] = useState("");
-  const [data, setData] = useState<Doctor[]>([]);
-  const [loading, setLoading] = useState(true);
   const [selectedDoctor, setSelectedDoctor] = useState<Doctor | null>(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setData(DOCTORS_DB);
-      setLoading(false);
-    }, 1500);
-  }, []);
+  const { data: doctors = [], isLoading } = useDoctors();
 
   useEffect(() => {
     if (isDarkMode) {
@@ -32,17 +25,19 @@ const Index = () => {
     }
   }, [isDarkMode]);
 
-  const suggestedKeywords = useMemo(() => getSuggestedKeywords(DOCTORS_DB), []);
+  const suggestedKeywords = useMemo(() => getSuggestedKeywords(doctors), [doctors]);
 
   const filteredData = useMemo(() => {
-    return data.filter(item => {
+    return doctors.filter(item => {
       const matchSpecialty = selectedSpecialty === "Tất cả" || item.specialty === selectedSpecialty;
-      const matchSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          item.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          item.geo_keywords.toLowerCase().includes(searchTerm.toLowerCase());
+      const searchLower = searchTerm.toLowerCase();
+      const matchSearch = 
+        item.name.toLowerCase().includes(searchLower) || 
+        item.address.toLowerCase().includes(searchLower) ||
+        (item.geo_keywords?.toLowerCase().includes(searchLower) ?? false);
       return matchSpecialty && matchSearch;
     });
-  }, [data, selectedSpecialty, searchTerm]);
+  }, [doctors, selectedSpecialty, searchTerm]);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -82,7 +77,7 @@ const Index = () => {
               {searchTerm ? (
                 <>Tìm kiếm: <strong className="text-primary">"{searchTerm}"</strong> • </>
               ) : null}
-              Kết quả: <strong className="text-foreground">{loading ? "..." : filteredData.length}</strong> bác sĩ
+              Kết quả: <strong className="text-foreground">{isLoading ? "..." : filteredData.length}</strong> bác sĩ
             </span>
           </div>
           
@@ -96,7 +91,7 @@ const Index = () => {
           )}
         </div>
 
-        {loading ? (
+        {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[...Array(6)].map((_, index) => (
               <SkeletonCard key={index} />

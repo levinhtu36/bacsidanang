@@ -1,5 +1,5 @@
 import { X, Search, Phone, MessageCircle, MapPin, Building2, Award, ChevronRight, Sparkles } from 'lucide-react';
-import type { Doctor } from '@/data/doctors';
+import type { Doctor } from '@/hooks/useDoctors';
 
 interface DoctorDetailModalProps {
   item: Doctor | null;
@@ -10,7 +10,8 @@ interface DoctorDetailModalProps {
 const DoctorDetailModal = ({ item, onClose, onTagClick }: DoctorDetailModalProps) => {
   if (!item) return null;
 
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.address)}`;
+  // Use google_map_link if available, otherwise generate from address
+  const mapsUrl = item.google_map_link || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.address)}`;
 
   const handleGoogleSearch = () => {
     const query = encodeURIComponent(`${item.name} ${item.specialty} Đà Nẵng`);
@@ -63,7 +64,7 @@ const DoctorDetailModal = ({ item, onClose, onTagClick }: DoctorDetailModalProps
               {item.name}
             </h2>
             <p className="text-muted-foreground text-base leading-relaxed">
-              {item.bio || `Bác sĩ chuyên khoa ${item.specialty} uy tín tại Đà Nẵng.`}
+              Bác sĩ chuyên khoa {item.specialty} uy tín tại Đà Nẵng.
             </p>
           </div>
 
@@ -131,24 +132,26 @@ const DoctorDetailModal = ({ item, onClose, onTagClick }: DoctorDetailModalProps
             </div>
 
             {/* Block 3: Expertise */}
-            <div className="bg-primary/5 p-5 rounded-2xl border border-primary/20">
-              <div className="flex items-center gap-2 mb-3">
-                <Sparkles size={18} className="text-primary" />
-                <span className="text-sm font-bold text-card-foreground uppercase tracking-wide">Chuyên môn sâu (Nhấn để tìm)</span>
+            {item.geo_keywords && (
+              <div className="bg-primary/5 p-5 rounded-2xl border border-primary/20">
+                <div className="flex items-center gap-2 mb-3">
+                  <Sparkles size={18} className="text-primary" />
+                  <span className="text-sm font-bold text-card-foreground uppercase tracking-wide">Chuyên môn sâu (Nhấn để tìm)</span>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {item.geo_keywords.split(',').map((keyword, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => onTagClick && onTagClick(keyword.trim())}
+                      className="text-xs font-bold bg-card text-primary px-3 py-1.5 rounded-lg border border-primary/20 shadow-sm hover:bg-primary hover:text-primary-foreground hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                      title={`Tìm các bác sĩ chuyên về ${keyword.trim()}`}
+                    >
+                      {keyword.trim()}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {item.geo_keywords && item.geo_keywords.split(',').map((keyword, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => onTagClick && onTagClick(keyword.trim())}
-                    className="text-xs font-bold bg-card text-primary px-3 py-1.5 rounded-lg border border-primary/20 shadow-sm hover:bg-primary hover:text-primary-foreground hover:scale-105 active:scale-95 transition-all cursor-pointer"
-                    title={`Tìm các bác sĩ chuyên về ${keyword.trim()}`}
-                  >
-                    {keyword.trim()}
-                  </button>
-                ))}
-              </div>
-            </div>
+            )}
           </div>
 
           {/* Footer CTAs */}
@@ -175,12 +178,12 @@ const DoctorDetailModal = ({ item, onClose, onTagClick }: DoctorDetailModalProps
           </div>
         </div>
 
-        {/* RIGHT COLUMN: WORKPLACE IMAGE */}
+        {/* RIGHT COLUMN: DOCTOR IMAGE */}
         <div className="w-full md:w-[40%] h-48 md:h-auto relative bg-muted order-first md:order-last border-l border-border">
-          {item.workplace_image ? (
+          {item.image_url ? (
             <img 
-              src={item.workplace_image} 
-              alt={`Ảnh ${item.workplace}`}
+              src={item.image_url} 
+              alt={`Ảnh ${item.name}`}
               className="w-full h-full object-cover object-center"
             />
           ) : (

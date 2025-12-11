@@ -1,4 +1,4 @@
-import { SPECIALTIES } from '@/data/doctors';
+import { SPECIALTIES } from '@/hooks/useDoctors';
 
 interface SpecialtyBarProps {
   selectedSpecialty: string;
