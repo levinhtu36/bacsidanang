@@ -7,11 +7,10 @@ const HeroSection = () => {
             <Sparkles size={14} />
             <span>Nền tảng Y tế 4.0</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-foreground leading-tight mb-4 tracking-tight md:text-4xl bg-primary-foreground">
-            Tìm bác sĩ phù hợp <br className="hidden md:block" />
-            <span className="text-gradient bg-primary-foreground text-secondary-foreground">
-              Nhanh • Tin cậy • Miễn phí
-            </span>
+          <h1 className="text-3xl font-extrabold leading-tight mb-4 tracking-tight md:text-4xl bg-blue-50 text-ring">Tìm bác sĩ phù hợp
+
+Nhanh • Tin cậy • Miễn phí<br className="hidden md:block" />
+            
           </h1>
           <p className="text-muted-foreground text-lg mb-6 max-w-lg mx-auto md:mx-0 leading-relaxed">
             Kết nối với các chuyên gia y tế hàng đầu tại Đà Nẵng. Thông tin minh bạch, cập nhật liên tục để bạn an tâm chăm sóc sức khỏe.
