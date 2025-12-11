@@ -103,10 +103,10 @@ const DoctorCard = ({ item, onClick }: DoctorCardProps) => {
 
         <button 
           onClick={(e) => handleActionClick(e, handleContact)}
-          className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-bold text-primary-foreground rounded-xl transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 z-10 ${
+          className={`flex-1 flex items-center justify-center gap-2 px-3 py-2.5 text-sm font-bold rounded-xl transition-all z-10 shadow-sm ${
             item.zalo_active 
-              ? 'gradient-primary' 
-              : 'bg-foreground hover:bg-foreground/90'
+              ? 'bg-card border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground' 
+              : 'bg-foreground text-primary-foreground hover:bg-foreground/90 shadow-md hover:shadow-lg hover:-translate-y-0.5'
           }`}
         >
           {item.zalo_active ? <MessageCircle size={16} /> : <Phone size={16} />}
