@@ -7,10 +7,7 @@ const HeroSection = () => {
             <Sparkles size={14} />
             <span>Nền tảng Y tế 4.0</span>
           </div>
-          <h1 className="text-3xl font-extrabold leading-tight mb-4 tracking-tight md:text-4xl bg-blue-50 text-ring">Tìm bác sĩ phù hợp
-
-
-
+          <h1 className="text-3xl font-extrabold leading-tight mb-4 tracking-tight bg-blue-50 text-ring md:text-5xl">Tìm bác sĩ phù hợp
 Nhanh • Tin cậy • Miễn phí<br className="hidden md:block" />
             
           </h1>
