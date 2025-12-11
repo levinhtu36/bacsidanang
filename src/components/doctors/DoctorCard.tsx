@@ -1,5 +1,6 @@
 import { Search, Phone, MessageCircle, MapPin, Building2 } from 'lucide-react';
-import type { Doctor } from '@/data/doctors';
+import type { Doctor } from '@/hooks/useDoctors';
+import { getInitials } from '@/hooks/useDoctors';
 
 interface DoctorCardProps {
   item: Doctor;
@@ -40,10 +41,10 @@ const DoctorCard = ({ item, onClick }: DoctorCardProps) => {
       <div className="p-6 flex items-start gap-4">
         <div className="relative">
           <div className="flex-shrink-0 w-14 h-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center font-bold text-xl border border-primary/20 group-hover:scale-105 transition-transform overflow-hidden p-1 shadow-inner">
-            {item.image ? (
-              <img src={item.image} alt="Avatar" className="w-full h-full object-contain" />
+            {item.image_url ? (
+              <img src={item.image_url} alt="Avatar" className="w-full h-full object-cover rounded-xl" />
             ) : (
-              item.initials
+              getInitials(item.name)
             )}
           </div>
           {item.zalo_active && (
