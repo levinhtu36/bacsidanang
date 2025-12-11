@@ -5,9 +5,9 @@ const HeroSection = () => {
         <div className="flex-1 text-center md:text-left z-10">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4 animate-fade-in">
             <Sparkles size={14} />
-            <span>Nền tảng Y tế 4.0</span>
+            <span className="text-4xl text-secondary-foreground">Nền tảng Y tế 4.0</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-foreground leading-tight mb-4 tracking-tight md:text-4xl border-0 px-0 py-0 my-0 mx-0">Tìm bác sĩ phù hợp 
+          <h1 className="text-3xl font-extrabold leading-tight mb-4 tracking-tight md:text-4xl border-0 px-0 py-0 my-0 mx-0 bg-primary-foreground text-warning">Tìm bác sĩ phù hợp 
 ​Nhanh • Tin cậy • Miễn phí<br className="hidden md:block" />
             <span className="text-center bg-primary-foreground py-0 px-0 my-0 mx-0 text-4xl font-extralight text-secondary-foreground">
               ​Nhanh • Tin cậy • Miễn phí
